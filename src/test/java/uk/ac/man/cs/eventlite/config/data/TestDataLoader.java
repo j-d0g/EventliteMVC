@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
+import uk.ac.man.cs.eventlite.entities.Event;
 
 @Configuration
 @Profile("test")
@@ -26,6 +27,7 @@ public class TestDataLoader {
 	@Bean
 	CommandLineRunner initDatabase() {
 		return args -> {
+			eventService.save(new Event());
 			// Build and save test events and venues here.
 			// The test database is configured to reside in memory, so must be initialized
 			// every time.
