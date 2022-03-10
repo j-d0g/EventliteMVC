@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 @Entity
 @Table(name = "venue")
@@ -28,6 +29,7 @@ public class Venue {
 		this.id = id;
 	}
 
+	@OneToMany
 	public String getName() {
 		return name;
 	}
