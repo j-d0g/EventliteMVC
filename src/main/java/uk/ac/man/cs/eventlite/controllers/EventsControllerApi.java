@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import uk.ac.man.cs.eventlite.assemblers.EventModelAssembler;
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.entities.Event;
+import uk.ac.man.cs.eventlite.entities.Venue;
 import uk.ac.man.cs.eventlite.exceptions.EventNotFoundException;
 
 @RestController
@@ -27,6 +28,7 @@ public class EventsControllerApi {
 
 	private static final String NOT_FOUND_MSG = "{ \"error\": \"%s\", \"id\": %d }";
 
+	private Venue venue;
 	@Autowired
 	private EventService eventService;
 

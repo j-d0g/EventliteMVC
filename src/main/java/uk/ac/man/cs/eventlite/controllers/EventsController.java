@@ -1,5 +1,8 @@
 package uk.ac.man.cs.eventlite.controllers;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
 import uk.ac.man.cs.eventlite.exceptions.EventNotFoundException;
+import uk.ac.man.cs.eventlite.entities.Event;
+import uk.ac.man.cs.eventlite.entities.Venue;
 
 @Controller
 @RequestMapping(value = "/events", produces = { MediaType.TEXT_HTML_VALUE })
@@ -41,8 +46,9 @@ public class EventsController {
 	@GetMapping
 	public String getAllEvents(Model model) {
 
+		
 		model.addAttribute("events", eventService.findAll());
-		model.addAttribute("venues", venueService.findAll());
+
 
 		return "events/index";
 	}
