@@ -1,5 +1,8 @@
 package uk.ac.man.cs.eventlite.config.data;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +59,8 @@ public class InitialDataLoader {
 				Event e1 = new Event();
 				e1.setId(1);
 				e1.setName("Class");
+				e1.setTime(LocalTime.now());
+				e1.setDate(LocalDate.now());
 				e1.setVenue(1);
 				eventService.save(e1);
 				// Build and save initial events here.
