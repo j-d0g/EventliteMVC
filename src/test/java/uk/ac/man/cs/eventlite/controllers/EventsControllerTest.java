@@ -66,7 +66,7 @@ public class EventsControllerTest {
 		when(venue.getName()).thenReturn("Kilburn Building");
 		when(venueService.findAll()).thenReturn(Collections.<Venue>singletonList(venue));
 
-		when(event.getVenue()).thenReturn(1L);
+		when(event.getVenue()).thenReturn(venue);
 		when(eventService.findAll()).thenReturn(Collections.<Event>singletonList(event));
 
 		mvc.perform(get("/events").accept(MediaType.TEXT_HTML)).andExpect(status().isOk())
@@ -74,7 +74,7 @@ public class EventsControllerTest {
 
 		verify(eventService).findAll();
 		verify(venueService).findAll();
-	}
+	} 
 
 	@Test
 	public void getEventNotFound() throws Exception {

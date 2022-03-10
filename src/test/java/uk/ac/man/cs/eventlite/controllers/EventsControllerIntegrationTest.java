@@ -39,7 +39,7 @@ public class EventsControllerIntegrationTest extends AbstractTransactionalJUnit4
 		client.get().uri("/events").accept(MediaType.TEXT_HTML).exchange().expectStatus().isOk();
 	}
 
-	@Test
+	@Test 
 	public void getEventNotFound() {
 		client.get().uri("/events/99").accept(MediaType.TEXT_HTML).exchange().expectStatus().isNotFound().expectHeader()
 				.contentTypeCompatibleWith(MediaType.TEXT_HTML).expectBody(String.class).consumeWith(result -> {

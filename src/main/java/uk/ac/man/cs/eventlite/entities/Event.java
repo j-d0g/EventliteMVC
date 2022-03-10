@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -25,7 +26,7 @@ public class Event {
 
 	private String name;
 
-	private long venue;
+	private Venue venue;
 
 	public Event() {
 	}
@@ -61,12 +62,14 @@ public class Event {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public long getVenue() {
+	
+	@ManyToOne
+	public Venue getVenue() {
 		return venue;
 	}
-
-	public void setVenue(long venue) {
+ 
+	public void setVenue(Venue venue) {
 		this.venue = venue;
 	}
+
 }
