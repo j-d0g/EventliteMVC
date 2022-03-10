@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
+import uk.ac.man.cs.eventlite.entities.Venue;
 
 @Configuration
 @Profile("default")
@@ -30,6 +31,17 @@ public class InitialDataLoader {
 				log.info("Database already populated with venues. Skipping venue initialization.");
 			} else {
 				// Build and save initial venues here.
+				Venue v1 = new Venue();
+				v1.setId(1);
+				v1.setName("Kilburn G23");
+				v1.setCapacity(120);
+				venueService.save(v1);
+				
+				Venue v2 = new Venue();
+				v2.setId(2);
+				v2.setName("Online");
+				v2.setCapacity(10000);
+				venueService.save(v2);
 			}
 
 			if (eventService.count() > 0) {
