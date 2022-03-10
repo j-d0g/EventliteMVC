@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -21,6 +22,10 @@ public class VenueServiceImpl implements VenueService {
 
 	private final static String DATA = "data/venues.json";
 
+	@Autowired
+	private VenueRepository venueRepository;
+	
+	
 	@Override
 	public long count() {
 		long count = 0;
@@ -49,6 +54,11 @@ public class VenueServiceImpl implements VenueService {
 		}
 
 		return venues;
+	}
+	
+	@Override 
+	public Venue save(Venue venue) {
+		return venueRepository.save(venue);
 	}
 
 }
