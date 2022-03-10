@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
 import uk.ac.man.cs.eventlite.entities.Venue;
+import uk.ac.man.cs.eventlite.entities.Event;
 
 @Configuration
 @Profile("default")
@@ -47,6 +48,16 @@ public class InitialDataLoader {
 			if (eventService.count() > 0) {
 				log.info("Database already populated with events. Skipping event initialization.");
 			} else {
+				Venue v1 = new Venue();
+				v1.setId(1);
+				v1.setName("Kilburn G23");
+				v1.setCapacity(120);
+				
+				Event e1 = new Event();
+				e1.setId(1);
+				e1.setName("Class");
+				e1.setVenue(1);
+				eventService.save(e1);
 				// Build and save initial events here.
 			}
 		};
