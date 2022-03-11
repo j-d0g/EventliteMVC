@@ -1,5 +1,7 @@
 package uk.ac.man.cs.eventlite.entities;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,6 +18,8 @@ public class Venue {
 
 	private String name;
 
+	@OneToMany(targetEntity=Event.class,mappedBy="venue")
+	private Set<Event> events;
 	private int capacity;
 
 	public Venue() {
@@ -28,8 +32,7 @@ public class Venue {
 	public void setId(long id) {
 		this.id = id;
 	}
-
-	@OneToMany
+	
 	public String getName() {
 		return name;
 	}
@@ -44,5 +47,13 @@ public class Venue {
 
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
+	}
+	
+	private Set<Event> getEvent(){
+		return events;
+	}
+	
+	public void setEvents(Set<Event> events) {
+		this.events = events;
 	}
 }
