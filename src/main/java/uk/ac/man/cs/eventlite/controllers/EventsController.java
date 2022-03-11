@@ -2,6 +2,7 @@ package uk.ac.man.cs.eventlite.controllers;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,11 +47,23 @@ public class EventsController {
 	@GetMapping
 	public String getAllEvents(Model model) {
 
-		
-		model.addAttribute("events", eventService.findAll());
+		Iterable<Event> events = eventService.findAll();
+		List<Venue> venues = new ArrayList<Venue>();
+		events.forEach((element) -> {
+			if(!venues.contains(element.getVenue())) {
+				venues.add(Venue(element.getVenue()));
+			}
+		});
+		model.addAttribute("events",events);
+		model.addAttribute("venues",venues);
 
 
 		return "events/index";
+	}
+
+	private Venue Venue(long venue) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
