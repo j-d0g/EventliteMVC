@@ -1,4 +1,5 @@
 package uk.ac.man.cs.eventlite.dao;
+import java.util.Collection;
 
 import java.io.InputStream;
 import java.util.Collections;
@@ -41,21 +42,17 @@ public class VenueServiceImpl implements VenueService {
 
 	@Override
 	public Iterable<Venue> findAll() {
-		
-//		Iterable<Venue> venues;
-//
-//		try {
-//			ObjectMapper mapper = new ObjectMapper();
-//			InputStream in = new ClassPathResource(DATA).getInputStream();
-//
-//			venues = mapper.readValue(in, mapper.getTypeFactory().constructCollectionType(List.class, Venue.class));
-//		} catch (Exception e) {
-//			// If we can't read the file, then the event list is empty...
-//			log.error("Exception while reading file '" + DATA + "': " + e);
-//			venues = Collections.emptyList();
-//		}
-
-		return venueRepository.findAll();
+		Iterable<Venue> venues;
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			InputStream in = new ClassPathResource(DATA).getInputStream();
+			venues = mapper.readValue(in, mapper.getTypeFactory().constructCollectionType(List.class, Venue.class));
+		} catch (Exception e) {
+			// If we can't read the file, then the event list is empty...
+			log.error("Exception while reading file '" + DATA + "': " + e);
+			venues = Collections.emptyList();
+			}
+		return venues;
 	}
 	
 	@Override 
