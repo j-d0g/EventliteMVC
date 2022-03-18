@@ -58,25 +58,27 @@ public class InitialDataLoader {
 				
 				Event e1 = new Event();
 				e1.setId(1);
-				e1.setName("Class");
-				e1.setTime(LocalTime.now());
-				e1.setDate(LocalDate.now());
-				e1.setVenue(1);
-				eventService.save(e1);
-				// Build and save initial events here.
-				Venue v1 = new Venue();
-				v1.setId(1);
-				v1.setName("Kilburn G23");
-				v1.setCapacity(120);
-				
-				Event e1 = new Event();
-				e1.setId(1);
-				e1.setName("Class");
-				e1.setTime(LocalTime.now());
-				e1.setDate(LocalDate.now());
+				e1.setName("COMP23412 Showcase, group F");
+				e1.setTime(LocalTime.of(16, 0));
+				e1.setDate(LocalDate.of(2022, 05, 17));
 				e1.setVenue(v1);
 				eventService.save(e1);
 
+				Event e2 = new Event();
+				e2.setId(1);
+				e2.setName("COMP23412 Showcase, group G");
+				e2.setTime(LocalTime.of(16, 0));
+				e2.setDate(LocalDate.of(2022, 05, 19));
+				e2.setVenue(v1);
+				eventService.save(e2);
+				
+				Event e3 = new Event();
+				e3.setId(1);
+				e3.setName("COMP23412 Showcase, group G");
+				e3.setTime(LocalTime.of(16, 0));
+				e3.setDate(LocalDate.of(2022, 05, 20));
+				e3.setVenue(v1);
+				eventService.save(e3);
 			}
 		};
 	}
