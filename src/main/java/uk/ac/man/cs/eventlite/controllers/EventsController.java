@@ -51,7 +51,7 @@ public class EventsController {
 		List<Venue> venues = new ArrayList<Venue>();
 		events.forEach((element) -> {
 			if(!venues.contains(element.getVenue())) {
-				venues.add(Venue(element.getVenue()));
+				venues.add(element.getVenue());
 			}
 		});
 		model.addAttribute("events",events);
@@ -60,10 +60,4 @@ public class EventsController {
 
 		return "events/index";
 	}
-
-	private Venue Venue(long venue) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
