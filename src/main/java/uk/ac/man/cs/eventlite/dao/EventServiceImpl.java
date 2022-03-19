@@ -19,10 +19,6 @@ import uk.ac.man.cs.eventlite.entities.Event;
 @Service
 public class EventServiceImpl implements EventService {
 
-	private final static Logger log = LoggerFactory.getLogger(EventServiceImpl.class);
-
-	private final static String DATA = "data/events.json";
-	
 	@Autowired
 	private EventRepository eventRepository;
 
@@ -57,7 +53,7 @@ public class EventServiceImpl implements EventService {
 		//}
 
 		//return events;
-		return eventRepository.findAll();
+		return eventRepository.findAllByOrderByDateAscTimeAsc();
 	}
 
 
