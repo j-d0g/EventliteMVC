@@ -34,6 +34,7 @@ public class EventServiceImpl implements EventService {
 		//return count;
 		return eventRepository.count();
 	}
+	
 		
 
 	@Override
@@ -55,10 +56,42 @@ public class EventServiceImpl implements EventService {
 		//return events;
 		return eventRepository.findAllByOrderByDateAscTimeAsc();
 	}
-
+	
 
 	@Override
 	public Event save(Event event) {
 		return eventRepository.save(event);
 	}
+	
+	
+	@Override
+	public void delete(Event event) {
+		eventRepository.delete(event);
+	}
+	
+	@Override
+	public void deleteById(long id) {
+		eventRepository.deleteById(id);
+	}
+
+	@Override
+	public void deleteAll() {
+		eventRepository.deleteAll();
+	}
+
+	@Override
+	public void deleteAll(Iterable<Event> events) {
+		eventRepository.deleteAll(events);
+	}
+
+	@Override
+	public void deleteAllById(Iterable<Long> ids) {
+		eventRepository.deleteAllById(ids);
+	}
+
+	@Override
+	public boolean existsById(long id) {
+		return eventRepository.existsById(id);
+	}
+
 }
