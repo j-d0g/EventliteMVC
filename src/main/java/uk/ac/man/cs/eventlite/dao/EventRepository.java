@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface EventRepository extends CrudRepository<Event, Long> {
 	public Iterable<Event> findAllByOrderByDateAscTimeAsc();
-
+	public Iterable<Event> findAllByNameContaining(String name);
 }
