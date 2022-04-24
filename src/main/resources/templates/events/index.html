@@ -27,8 +27,28 @@
         </tr>
       </tbody>
     </table>
+    <h1>Add new Event</h1>
+    <form action="#" th:action="@{/events}" th:object="${event}" method="post">
+      <div class="form-group">
+        <label for="name">Event text</label>
+        <input class="form-control" type="text" name="name" id="name" autofocus="autofocus" />
+        <label for="venue">Venue id</label>
+        <input class="form-control" type="text" name="venue" id="venue" autofocus="autofocus" />
+        <label for="date">Event date</label>
+        <input class="form-control" type="text" name="date" id="date" pattern="\d{4}-\d{2}-\d{2}" autofocus="autofocus" />
+        <label for="time">Event time</label>
+        <input class="form-control" type="text" name="time" id="time" pattern="([01]?[0-9]{1}|2[0-3]{1}):[0-5]{1}[0-9]{1}" autofocus="autofocus" />
+      </div>
+    
+      <button class="btn btn-primary" type="submit"><i class="fas fa-bookmark" aria-hidden="true"></i> Add</button>
+      <a class="btn btn-warning" role="button" href="/events"><i class="fas fa-ban" aria-hidden="true"></i> Cancel</a>
+    </form>
+   </div> 
+   
+   
+    
+   
 
-  </div>
 
 </body>
 </html>

@@ -5,6 +5,9 @@ import java.time.LocalTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -15,16 +18,21 @@ public class Event {
 	@GeneratedValue
 	private long id;
 
+	//@NotEmpty(message = "The date cannot be empty.")
 	@JsonFormat(shape = JsonFormat.Shape.STRING)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
-
+	
+	//@NotEmpty(message = "The time cannot be empty.")
 	@JsonFormat(shape = JsonFormat.Shape.STRING)
 	@DateTimeFormat(pattern = "HH:mm")
 	private LocalTime time;
-
+	
+	@NotEmpty(message = "The name cannot be empty.")
+	@Size(max = 30, message = "The greeting must have 30 characters or less.")
 	private String name;
-
+    
+	@NotNull
 	private long venue;
 
 	public Event() {
