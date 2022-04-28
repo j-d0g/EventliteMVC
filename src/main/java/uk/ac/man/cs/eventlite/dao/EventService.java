@@ -1,6 +1,8 @@
 package uk.ac.man.cs.eventlite.dao;
 
 import uk.ac.man.cs.eventlite.entities.Event;
+import java.util.Optional;
+
 
 public interface EventService {
 
@@ -11,4 +13,6 @@ public interface EventService {
 	public Event save(Event event);
 	
 	public Iterable<Event> findAll(String name);
+
+	public Optional<Event> findById(long id);
 }

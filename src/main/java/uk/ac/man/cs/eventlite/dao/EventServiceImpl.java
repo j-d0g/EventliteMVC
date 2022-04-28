@@ -1,13 +1,30 @@
 package uk.ac.man.cs.eventlite.dao;
 
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import uk.ac.man.cs.eventlite.entities.Event;
 
 @Service
 public class EventServiceImpl implements EventService {
 
+	private final static Logger log = LoggerFactory.getLogger(EventServiceImpl.class);
+
+	private final static String DATA = "data/events.json";
+	
 	@Autowired
 	private EventRepository eventRepository;
 
@@ -42,8 +59,9 @@ public class EventServiceImpl implements EventService {
 		//}
 
 		//return events;
-		return eventRepository.findAllByOrderByDateAscTimeAsc();
+		return eventRepository.findAll();
 	}
+
 
 	@Override
 	public Event save(Event event) {
@@ -55,4 +73,8 @@ public class EventServiceImpl implements EventService {
 		return eventRepository.findAllByNameContaining(name);
 	}  
 	
+
+	public Optional<Event> findById(long id){
+		return eventRepository.findById(id);
+	}
 }
