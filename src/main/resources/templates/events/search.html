@@ -7,7 +7,7 @@
 </head>
 <body>
   <div layout:fragment="content">
-    <h1>All events</h1>
+    <h1>Search events</h1>
 
     <table class="table table-striped table-hover">
       <thead>
@@ -27,10 +27,6 @@
         </tr>
       </tbody>
     </table>
-    <form action="#" th:action="@{/events/search}" th:object="${event}" th:method="GET">
-        <input type="text" th:value="${name}" name="name" id="name" value=""></input>
-        <button type="submit">Search</button>
-    </form>
   </div>
 
 </body>
