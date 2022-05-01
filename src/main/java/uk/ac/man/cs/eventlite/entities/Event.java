@@ -28,6 +28,8 @@ public class Event {
 
 	@ManyToOne
 	private Venue venue;
+	
+	private String description;
 
 	public Event() {
 	}
@@ -63,6 +65,14 @@ public class Event {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
 
 	public Venue getVenue() {
 		return venue;
@@ -71,4 +81,5 @@ public class Event {
 	public void setVenue(Venue venue) {
 		this.venue = venue;
 	}
+	//Changes By Matthew
 }

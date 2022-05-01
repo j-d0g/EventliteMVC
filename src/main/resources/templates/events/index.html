@@ -35,12 +35,11 @@
         </tr>
       </tbody>
     </table>
-<<<<<<< HEAD
     <form action="#" th:action="@{/events/search}" th:object="${event}" th:method="GET">
         <input type="text" th:value="${name}" name="name" id="name" value=""></input>
         <button type="submit">Search</button>
     </form>
-=======
+
 
 	<form th:action="${(#mvc.url('EC#deleteAllEvents')).build()}" th:method="delete">
       
@@ -48,7 +47,11 @@
     </form>
 	
 >>>>>>> refs/heads/issue_12(delete_event)
+=======
+ 
+      
   </div>
+  
 
 </body>
 </html>
