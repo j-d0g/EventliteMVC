@@ -15,4 +15,17 @@ public interface EventService {
 	public Iterable<Event> findAll(String name);
 
 	public Optional<Event> findById(long id);
+	
+	public void delete(Event event);
+	
+	public void deleteById(long id);
+
+	public void deleteAll();
+
+	public void deleteAll(Iterable<Event> events);
+
+	public void deleteAllById(Iterable<Long> ids);
+
+	public boolean existsById(long id);
+
 }
