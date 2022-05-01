@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+  <title>Add Event</title>
+</head>
+<body>
+  <div layout:fragment="content">
+  	<div class="alert alert-danger" role="alert" th:if="${param.error}">
+      	Missing Information
+    </div>
+    <form th:action="@{/events}" th:object="${newEvent}" modelAttribute = newEvent method="post">
+      <div class="form-row">
+        <div class="form-group col-md-6" th:classappend="${param.error}? has-error">
+          <label for="name">Name:</label>
+          <input class="form-control" type="text" th:value="${event?.getName()}" name="name" id="name" autofocus="autofocus" />
+        </div>
+        <div class="form-group col-md-6" th:classappend="${param.error}? has-error">
+          <label for="venue">Venue:</label>
+          <select th:field="*{venue}" class="form-control" style="float:left">
+        	<option th:each="venue : ${venues}" th:value="${venue.id}" th:text="${venue.name}"></option>
+          </select><br>
+        </div>
+        <div class="form-group col-md-6" th:classappend="${param.error}? has-error">
+          <label for="date">Date:</label>
+          <input class="form-control" type="date" th:value="${event?.getDate()}" name="date" id="date" autofocus="autofocus" />
+        </div>
+        <div class="form-group col-md-6" th:classappend="${param.error}? has-error">
+          <label for="time">Time:</label>
+          <input class="form-control" type="time" th:value="${event?.getTime()}" name="time" id="time" autofocus="autofocus" />
+        </div>
+        <div class="form-group col-md-6" th:classappend="${param.error}? has-error">
+          <label for="name">Description:</label>
+          <input class="form-control" type="text" th:value="${event?.getDescription()}" name="description" id="description" autofocus="autofocus" />
+        </div>
+      </div>
+      
+      <button class="btn btn-primary" type="submit"><i class="add" aria-hidden="true"></i>Add Event</button>
+      <a class="btn btn-warning" role="button" href="/"><i class="fas fa-ban" aria-hidden="true"></i> Cancel</a>
+    </form>
+  </div>
+</body>
+</html>
