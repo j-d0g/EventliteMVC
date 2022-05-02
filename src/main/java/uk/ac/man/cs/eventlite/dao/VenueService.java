@@ -10,4 +10,7 @@ public interface VenueService {
 	
 	public Venue save(Venue venue);
 
+	public Iterable<Venue> findall(String place);
+
+
 }
