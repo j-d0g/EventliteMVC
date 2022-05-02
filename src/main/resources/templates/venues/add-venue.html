@@ -20,6 +20,10 @@
           <label for="capacity">Capacity:</label>
           <input class="form-control" type="text" th:value="${event?.getCapacity()}" name="capacity" id="capacity" autofocus="autofocus" />
         </div>
+        <div class="form-group col-md-6" th:classappend="${param.error}? has-error">
+          <label for="address">Address:</label>
+          <input class="form-control" type="text" th:value="${event?.getAddress()}" name="address" id="address" autofocus="autofocus" pattern="(?:[A-Za-z0-9.-]+[ ]?)+(?:Avenue|Lane|Road|Boulevard|Drive|Street|Ave|Dr|Rd|Blvd|Ln|St)(,{1})(GIR[ ]?0AA|((AB|AL|B|BA|BB|BD|BH|BL|BN|BR|BS|BT|CA|CB|CF|CH|CM|CO|CR|CT|CV|CW|DA|DD|DE|DG|DH|DL|DN|DT|DY|E|EC|EH|EN|EX|FK|FY|G|GL|GY|GU|HA|HD|HG|HP|HR|HS|HU|HX|IG|IM|IP|IV|JE|KA|KT|KW|KY|L|LA|LD|LE|LL|LN|LS|LU|M|ME|MK|ML|N|NE|NG|NN|NP|NR|NW|OL|OX|PA|PE|PH|PL|PO|PR|RG|RH|RM|S|SA|SE|SG|SK|SL|SM|SN|SO|SP|SR|SS|ST|SW|SY|TA|TD|TF|TN|TQ|TR|TS|TW|UB|W|WA|WC|WD|WF|WN|WR|WS|WV|YO|ZE)(\d[\dA-Z]?[ ]?\d[ABD-HJLN-UW-Z]{2}))|BFPO[ ]?\d{1,4})" placeholder="20 Something Lane,M14 6YZ"/>
+        </div>
       </div>
       <button class="btn btn-primary" type="submit"><i class="add" aria-hidden="true"></i>Add Venue</button>
       <a class="btn btn-warning" role="button" href="/"><i class="fas fa-ban" aria-hidden="true"></i> Cancel</a>
