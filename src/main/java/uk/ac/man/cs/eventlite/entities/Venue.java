@@ -8,6 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -18,19 +22,55 @@ public class Venue {
 	@GeneratedValue
 	private long id;
 	
-	@Size(max = 256)
+	@NotBlank(message = "the venue name can't be blank")
+	@Size(max=255,message = "Venue name shouldn't be longer than 256 characters")
+
 	private String name;
+
 	
-	@Size(max = 300)
-	private String address;
+	@NotBlank(message = "The road name can't be blank")
+	@Size(max = 299, message="Road name shouldn't be longer than 300 characters")
+	
+	@NotBlank(message = "The postcode can't be blank")
+	@Size(min=6, max=8, message = "Postcode should be valid")
+	
+	private String postcode;
+	private String road;
+	
+	@NotNull
+	@Min(0)
 
 	@OneToMany(targetEntity=Event.class,mappedBy="venue")
 	private Set<Event> events;
-	
-	@Min(value=0, message = "Must be a postive value ")
 	private int capacity;
+	
+	private transient String address;
+	
+	public void postLoad() {
+		this.address = road + ", " + postcode;
+	}
 
 	public Venue() {
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+	
+	public void setRoad(String road) {
+		this.road = road;
+	}
+	
+	public String getRoad() {
+		return road;
+	}
+	
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+	
+	public String getPostcode() {
+		return postcode;
 	}
 
 	public long getId() {
@@ -55,13 +95,6 @@ public class Venue {
 
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
-	}
-	
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getAddress() {
-		return address;
 	}
 	
 	private Set<Event> getEvent(){
