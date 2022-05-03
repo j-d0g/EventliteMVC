@@ -36,7 +36,7 @@
       </tbody>
     </table>
     <form action="#" th:action="@{/events/search}" th:object="${event}" th:method="GET">
-        <input type="text" th:value="${name}" name="name" id="name" value=""></input>
+        Search Events: <input type="text" th:value="${name}" name="name" id="name" value=""></input>
         <button type="submit">Search</button>
     </form>
 
