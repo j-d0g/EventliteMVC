@@ -48,7 +48,7 @@ public class EventServiceImpl implements EventService {
 	
 	@Override
 	public Iterable<Event> findAll(String name){
-		return eventRepository.findAllByNameContaining(name);
+		return eventRepository.findAllByNameContainingIgnoreCase(name);
 	}  
 	
 
