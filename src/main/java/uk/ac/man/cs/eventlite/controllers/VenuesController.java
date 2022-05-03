@@ -24,13 +24,7 @@ import org.springframework.ui.Model;
 
 
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
+
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
 import org.springframework.validation.BindingResult;
@@ -54,6 +48,13 @@ public class VenuesController {
 	@GetMapping("/add-venue")
 	public String addVenue(Model model) {
 	return "venues/add-venue";
+	}
+	
+	@GetMapping("/search-venue")
+	public String searchVenue(Model model,@RequestParam(value="place") String place) {
+		Iterable<Venue> search = venueService.findall(place);
+		model.addAttribute("venues",search);
+		return "venues/search-venue";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)

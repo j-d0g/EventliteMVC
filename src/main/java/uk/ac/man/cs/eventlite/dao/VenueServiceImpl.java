@@ -62,5 +62,10 @@ public class VenueServiceImpl implements VenueService {
 	public Venue save(Venue venue) {
 		return venueRepository.save(venue);
 	}
+	
+	@Override
+	public Iterable<Venue> findall(String place){
+		return venueRepository.findAllByNameContainingIgnoreCase(place);
+	}
 
 }
