@@ -40,6 +40,10 @@
         <button type="submit">Search</button>
     </form>
 
+    <form action="#" th:action="@{/venues/search-venue}" th:object="${vanue}" th:method="GET">
+        Search Venues: <input type="text" th:value="${place}" name="place" id="place" value=""></input>
+        <button type="submit">Search</button>
+    </form>
 
 	<form th:action="${(#mvc.url('EC#deleteAllEvents')).build()}" th:method="delete">
       
