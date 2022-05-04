@@ -33,18 +33,23 @@ public class InitialDataLoader {
 		return args -> {
 			if (venueService.count() > 0) {
 				log.info("Database already populated with venues. Skipping venue initialization.");
+				Iterable<Venue> list  = venueService.findAll();
+				list.forEach((element) -> {System.out.println(element.getAddress());} );
+
 			} else {
 				// Build and save initial venues here.
 				Venue v1 = new Venue();
 				v1.setId(1);
 				v1.setName("Kilburn G23");
 				v1.setCapacity(120);
+				v1.setAddress("20 Something Street, M14 6XG");
 				venueService.save(v1);
 				
 				Venue v2 = new Venue();
 				v2.setId(2);
 				v2.setName("Online");
 				v2.setCapacity(10000);
+				v2.setAddress("20 Something Street, M14 6XG");
 				venueService.save(v2);
 			}
 
