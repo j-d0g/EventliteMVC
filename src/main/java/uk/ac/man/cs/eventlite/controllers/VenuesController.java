@@ -56,6 +56,13 @@ public class VenuesController {
 
 	@Autowired
 	private VenueService venueService;
+	
+	@GetMapping("/{id}")
+	public String getVenue(@PathVariable("id") long id, Model model) {
+		Venue venue = venueService.findById(id).orElseThrow(() -> new VenueNotFoundException(id));
+		model.addAttribute("venue", venue);
+		return "venues/show";
+	}
 
 	@GetMapping
 	public String getAllVenues(Model model) {

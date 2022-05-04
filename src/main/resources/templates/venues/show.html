@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+  <title>Venue</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <blockquote>
+    <h1 th:text="${venue.name}">Show Venues Greeting</h1>
+  </blockquote>
+
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th><i class="fas fa-map-marker-alt"></i> Address</th>
+      <th><i class="fas fa-calendar"></i> Capacity</th>
+      <th><i class="fas fa-sync"></i> Update</th>
+    </tr>
+    </thead>
+    <tbody>
+
+      <td th:text="${venue.getName()}">Venue name</td>
+      <td th:text="${{venue.getCapacity()}}">Venue capacity</td>
+      <td th:text="${{venue.getAddress()}}">Venue address</td>
+      <!-- ADD CODE FOR UPDATE BUTTON HERE -->
+
+    </tbody>
+  </table>
+
+
+<!--
+  <blockquote>
+    <p th:text="${venue.description}">Venue Description</p>
+  </blockquote>
+ -->
+
+
+  <form>
+    <a class="btn btn-primary" role="button" th:href="@{/venues}"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back</a>
+  	<button type="submit" class="btn btn-danger" sec:authorize="isAuthenticated()"><i class="fas fa-trash" aria-hidden="true"></i> Delete</button>
+  </form>
+
+
+</div>
+</body>
+</html>

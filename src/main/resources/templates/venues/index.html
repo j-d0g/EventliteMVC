@@ -13,8 +13,9 @@
       <thead>
         <tr>
           <th><i class="fas fa-bolt"></i> Name</th>
-          <th><i class="fas fa-map-marker-alt"></i> Capacity</th>
-          <th><i class="fas fa-calendar"></i> Address</th>
+          <th><i class="fas fa-map-marker-alt"></i> Address</th>
+          <th><i class="fas fa-calendar"></i> Capacity</th>
+          <th><i class="fas fa-sync"></i> Update</th>
         </tr>
       </thead>
       <tbody>
@@ -25,9 +26,16 @@
           <td th:text="${v.getName()}">Venue name</td>
           <td th:text="${{v.getCapacity()}}">Venue capacity</td>
           <td th:text="${{v.getAddress()}}">Venue address</td>
+          
+          <!-- # CAUSING ERROR: UPDATE BUTTON #
+          <td>
+           <a th:href="@{'/venue/update/' + ${v.id}}"><button type="button" class="btn btn-primary>
+           <i class = "fas fa-sync" aria-hidden="true"></i>Update</button></a>
+          </td>
+          -->
           <td>
           
-          <!-- # CAUSING ERROR #
+          <!-- # CAUSING ERROR: DELETE BUTTON #
             <form th:action="${(#mvc.url('EC#deleteVenue').arg(0, v.id)).build()}" th:method="delete" sec:authorize="isAuthenticated()">
               <button type="submit" class="btn btn-danger btn-sm">Delete</button>
             </form>
@@ -50,7 +58,7 @@
         <button type="submit">Search</button>
     </form>
 
-<!-- # CAUSING ERROR #
+<!-- # CAUSING ERROR: DELETE ALL BUTTON #
 	<form th:action="${(#mvc.url('EC#deleteAllVenues')).build()}" th:method="delete">
       
       <button type="submit" class="btn btn-danger" sec:authorize="isAuthenticated()"><i class="fas fa-trash" aria-hidden="true"></i> Delete All</button>
