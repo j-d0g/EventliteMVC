@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 import uk.ac.man.cs.eventlite.entities.Venue;
+import uk.ac.man.cs.eventlite.exceptions.EventNotFoundException;
 import uk.ac.man.cs.eventlite.exceptions.VenueNotFoundException;
 import uk.ac.man.cs.eventlite.entities.Event;
 import java.util.Optional;
@@ -55,8 +56,12 @@ public class VenuesController {
 
 	@Autowired
 	private VenueService venueService;
-	
-	
+
+	@GetMapping
+	public String getAllVenues(Model model) {
+		model.addAttribute("venues", venueService.findAll());
+		return "venues/index";
+	}
 	
 	@GetMapping("/add-venue")
 	public String addVenue(Model model) {
