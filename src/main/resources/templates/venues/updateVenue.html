@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/default}">
+<head>
+	<title>Update the venue</title>
+</head>
+<body>
+	<div layout:fragment="content">
+	<form th:action="@{update}" method="post">
+	
+		<p>
+		   <label for="Name">Name:</label>
+		   <input class="form-control" th:field="*{venue.name}" name="name" autofocus="autofocus" style="width:300px"/>
+		</p>
+		<p>
+		   <label for="Capacity">Capacity:</label>
+		   <input class="form-control" th:field="*{venue.capacity}" name="capacity" type="number" autofocus="autofocus" style="width:300px"/>
+		</p>
+		<p>
+		   <label for="Address">Address:</label>
+		   <input class="form-control" th:field="*{venue.address}" name="address" autofocus="autofocus" style="width:300px"/>
+		</p>
+		<p>
+		   <input type="submit" value="Save">
+		   <a class="btn btn-warning" role="button" href="/"><i class="fas fa-ban" aria-hidden="true"</i>Cancel</a>
+		</p>
+	</form>
+	</div>
+</body>
+</html>
+		   
+		
+		
+		
