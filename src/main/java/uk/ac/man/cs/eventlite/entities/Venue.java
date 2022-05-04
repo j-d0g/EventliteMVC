@@ -28,17 +28,17 @@ public class Venue {
 	private String name;
 
 	
-	@NotBlank(message = "The road name can't be blank")
-	@Size(max = 299, message="Road name shouldn't be longer than 300 characters")
+	//@NotBlank(message = "The road name can't be blank")
+	//@Size(max = 299, message="Road name shouldn't be longer than 300 characters")
 	
-	@NotBlank(message = "The postcode can't be blank")
-	@Size(min=6, max=8, message = "Postcode should be valid")
+	//@NotBlank(message = "The postcode can't be blank")
+	//@Size(min=6, max=8, message = "Postcode should be valid")
 	
-	private String postcode;
-	private String road;
+	//private String postcode;
+	//private String road;
 	
-	@NotNull
-	@Min(0)
+	//@NotNull
+	//@Min(0)
 
 	@OneToMany(targetEntity=Event.class,mappedBy="venue")
 	private Set<Event> events;
@@ -46,9 +46,9 @@ public class Venue {
 	
 	private transient String address;
 	
-	public void postLoad() {
-		this.address = road + ", " + postcode;
-	}
+	//public void postLoad() {
+	//	this.address = road + ", " + postcode;
+//	}
 
 	public Venue() {
 	}
@@ -57,21 +57,21 @@ public class Venue {
 		return address;
 	}
 	
-	public void setRoad(String road) {
-		this.road = road;
-	}
+	//public void setRoad(String road) {
+	//	this.road = road;
+	//}
 	
-	public String getRoad() {
-		return road;
-	}
+	//public String getRoad() {
+	//	return road;
+	//}
 	
-	public void setPostcode(String postcode) {
-		this.postcode = postcode;
-	}
+	//public void setPostcode(String postcode) {
+	//	this.postcode = postcode;
+	//}
 	
-	public String getPostcode() {
-		return postcode;
-	}
+	//public String getPostcode() {
+	//	return postcode;
+	//}
 
 	public long getId() {
 		return id;
