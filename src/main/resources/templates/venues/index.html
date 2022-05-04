@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/default}">
 <head>
   <title>All venues</title>
@@ -20,11 +21,12 @@
       </thead>
       <tbody>
         <tr th:each="v : ${venues}">
-          <td> 
-          <a th:href="@{/venues/{num}(num=${v.id})}" th:text="${v.name}">My Venue</a>
-          </td>
-          <td th:text="${{v.getAddress()}}">Venue address</td>
+         
+          <td th:text="${v.getName()}">Venue name</td>
           <td th:text="${{v.getCapacity()}}">Venue capacity</td>
+          <td th:text="${{v.getAddress()}}">Venue address</td>
+          <td> <a th:href="@{venues/updateVenue(id=${v.id})}">Update</a></td>
+          
           <!-- # CAUSING ERROR: UPDATE BUTTON #
           <td>
            <a th:href="@{'/venue/update/' + ${v.id}}"><button type="button" class="btn btn-primary>
