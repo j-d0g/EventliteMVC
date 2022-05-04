@@ -28,14 +28,6 @@
     </tbody>
   </table>
 
-
-<!--
-  <blockquote>
-    <p th:text="${venue.description}">Venue Description</p>
-  </blockquote>
- -->
-
-
   <form>
     <a class="btn btn-primary" role="button" th:href="@{/venues}"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back</a>
   	<button type="submit" class="btn btn-danger" sec:authorize="isAuthenticated()"><i class="fas fa-trash" aria-hidden="true"></i> Delete</button>

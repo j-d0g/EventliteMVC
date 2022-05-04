@@ -74,7 +74,7 @@ public class InitialDataLoader {
 				
 				Event e3 = new Event();
 				e3.setId(1);
-				e3.setName("COMP23412 Showcase, group G");
+				e3.setName("COMP23412 Showcase, group H");
 				e3.setTime(LocalTime.of(16, 0));
 				e3.setDate(LocalDate.of(2022, 05, 20));
 				e3.setVenue(v1);
