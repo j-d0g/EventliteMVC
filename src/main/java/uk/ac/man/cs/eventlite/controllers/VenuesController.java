@@ -4,8 +4,8 @@ package uk.ac.man.cs.eventlite.controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
+//import java.util.Collection;
+//import java.util.HashSet;
 import java.util.List;
 
 
@@ -18,7 +18,7 @@ import uk.ac.man.cs.eventlite.exceptions.EventNotFoundException;
 import uk.ac.man.cs.eventlite.exceptions.VenueNotFoundException;
 import uk.ac.man.cs.eventlite.entities.Event;
 import java.util.Optional;
-import java.util.Set;
+//import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
