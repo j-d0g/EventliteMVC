@@ -38,7 +38,7 @@
 	  </thead>
 	  <tbody>
 	  
-	    <tr th:each="e : ${}">
+	    <tr th:each="e : ${venue.events}">
 	      <td > 
 	      <a th:href="@{/events/{num}(num=${e.id})}" th:text="${e.name}">My Event</a>
 	      </td>
