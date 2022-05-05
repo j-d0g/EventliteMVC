@@ -24,10 +24,14 @@
       <!-- ADD CODE FOR UPDATE BUTTON HERE -->
     </tbody>
   </table>
-  <form>
+  <div>
     <a class="btn btn-primary" role="button" th:href="@{/venues}"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back</a>
-  	<button type="submit" class="btn btn-danger" sec:authorize="isAuthenticated()"><i class="fas fa-trash" aria-hidden="true"></i> Delete</button>
-  </form>
+	<div style="float:left;padding-left:3px;">
+		<form th:action="@{'/venues/' + ${venue.id}}" th:method="delete" >
+			<button type="submit" class="btn btn-danger"><i class ="fas fa-trash" aria-hidden="true"></i> Delete</button>
+		</form>
+	</div>
+  </div>
 </div>
 </body>
 </html>
