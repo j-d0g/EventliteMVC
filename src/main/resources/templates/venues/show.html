@@ -9,7 +9,6 @@
   <blockquote>
     <h1 th:text="${venue.name}">Show Venues Greeting</h1>
   </blockquote>
-
   <table class="table table-striped table-hover">
     <thead>
     <tr>
@@ -19,31 +18,16 @@
     </tr>
     </thead>
     <tbody>
-
       <td th:text="${venue.getName()}">Venue name</td>
       <td th:text="${{venue.getCapacity()}}">Venue capacity</td>
       <td th:text="${{venue.getAddress()}}">Venue address</td>
       <!-- ADD CODE FOR UPDATE BUTTON HERE -->
-
     </tbody>
   </table>
-
   <form>
     <a class="btn btn-primary" role="button" th:href="@{/venues}"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back</a>
   	<button type="submit" class="btn btn-danger" sec:authorize="isAuthenticated()"><i class="fas fa-trash" aria-hidden="true"></i> Delete</button>
   </form>
-
-<div style="float:left;padding-left:3px;">
-	<form th:action="@{'/venues/' + ${venues.id}}" th:method="delete" >
-	<button type="submit" class="btn btn-danger"><i class ="fas fa-trash" aria-hidden="true"></i> Delete</button>
-	</form>
-	<br>
-		<p th:text="${failed_to_delete_venue}">Because of there at least one remaining event that connecting to it, we can not delete the venue.</p >
-	</br>
-</div>
-
-
-
 </div>
 </body>
 </html>

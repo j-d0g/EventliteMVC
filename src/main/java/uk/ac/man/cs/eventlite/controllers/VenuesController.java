@@ -135,10 +135,8 @@ public class VenuesController {
 		}
 		else
 		{
-			redirectAttrs.addFlashAttribute("failed_to_delete_venue", "Because of there at least one remaining event that connecting to it, we can not delete the venue cannot.");
 			return "redirect:/venues/{id}";
 		}	
 	}
-	
 
 }
