@@ -103,24 +103,20 @@ public class VenuesController {
 	return "redirect:/events";
 	}
 	
-	@GetMapping(value = "/update/{id")
-	public String editVenue(@PathVariable("id") long id, Model model) {
+	@RequestMapping("updateVenue")
+	public String updateVenue(@RequestParam("id") long id, Model model) {
 		Venue v = venueService.findById(id).orElseThrow(() -> new VenueNotFoundException(id));
 		model.addAttribute("venue",v);
 		
-		return "venues/update";
+		return "venues/updateVenue.html";
 	}
 	
-	@PostMapping(value = "/update/{id}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String SaveEditedVenue(@RequestBody @Valid @ModelAttribute Venue venue,
-			BindingResult errors, Model model, RedirectAttributes redirectAttrs) {
-		if(errors.hasErrors()) {
-			model.addAttribute("venue",venue);
-			return "venues/update";
-		}
+	@RequestMapping(value = "/update")
+	public String Update(Venue venue,Model model) {
+		
 		
 		venueService.save(venue);
-		redirectAttrs.addFlashAttribute("all_done","Venue updated.");
+		model.addAttribute("venue",venue);
 		
 		return "redirect:/venues";
 	}

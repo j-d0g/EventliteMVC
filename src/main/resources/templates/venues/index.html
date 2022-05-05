@@ -14,9 +14,9 @@
       <thead>
         <tr>
           <th><i class="fas fa-bolt"></i> Name</th>
-          <th><i class="fas fa-map-marker-alt"></i> Address</th>
           <th><i class="fas fa-calendar"></i> Capacity</th>
-          <th><i class="fas fa-sync"></i> Update</th>
+          <th><i class="fas fa-map-marker-alt"></i> Address</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -27,21 +27,9 @@
           <td th:text="${{v.getAddress()}}">Venue address</td>
           <td> <a th:href="@{venues/updateVenue(id=${v.id})}">Update</a></td>
           
-          <!-- # CAUSING ERROR: UPDATE BUTTON #
-          <td>
-           <a th:href="@{'/venue/update/' + ${v.id}}"><button type="button" class="btn btn-primary>
-           <i class = "fas fa-sync" aria-hidden="true"></i>Update</button></a>
-          </td>
-          -->
-          <td>
           
-          <!-- # CAUSING ERROR: DELETE BUTTON #
-            <form th:action="${(#mvc.url('EC#deleteVenue').arg(0, v.id)).build()}" th:method="delete" sec:authorize="isAuthenticated()">
-              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-            </form>
-          -->
           
-          </td>
+          
           
         </tr>
       </tbody>

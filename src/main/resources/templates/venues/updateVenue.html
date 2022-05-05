@@ -22,9 +22,13 @@
 		   <input class="form-control" th:field="*{venue.address}" name="address" autofocus="autofocus" style="width:300px"/>
 		</p>
 		<p>
-		   <input type="submit" value="Save">
-		   <a class="btn btn-warning" role="button" href="/"><i class="fas fa-ban" aria-hidden="true"</i>Cancel</a>
+		   <input class="form-control" type="hidden" th:field="*{venue.id}" name="id" autofocus="autofocus" style="width:300px"/>
 		</p>
+		<p>
+		   <input type="submit" value="Save">
+		   <a class="btn btn-warning" role="button" href="/venues"><i class="fas fa-ban" aria-hidden="true"</i>Cancel</a>
+		</p>
+		
 	</form>
 	</div>
 </body>
