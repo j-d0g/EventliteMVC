@@ -125,5 +125,20 @@ public class VenuesController {
 		return "redirect:/venues";
 	}
 	
+	@DeleteMapping("/{id}")
+	public String deleteVenue(@PathVariable("id") long id, RedirectAttributes redirectAttrs) {
+		Venue v = venueService.findById(id).orElseThrow(() -> new VenueNotFoundException(id));
+		if (v.getEvent().isEmpty())
+		{
+			venueService.deleteById(id); 
+			return "redirect:/venues";
+		}
+		else
+		{
+			redirectAttrs.addFlashAttribute("failed_to_delete_venue", "Because of there at least one remaining event that connecting to it, we can not delete the venue cannot.");
+			return "redirect:/venues/{id}";
+		}	
+	}
 	
+
 }
