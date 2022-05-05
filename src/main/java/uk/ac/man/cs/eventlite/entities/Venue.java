@@ -44,7 +44,7 @@ public class Venue {
 	private Set<Event> events;
 	private int capacity;
 	
-	private transient String address;
+	private String address;
 	
 	//public void postLoad() {
 	//	this.address = road + ", " + postcode;
@@ -55,6 +55,10 @@ public class Venue {
 	
 	public String getAddress() {
 		return address;
+	}
+    
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	//public void setRoad(String road) {
