@@ -4,8 +4,9 @@ package uk.ac.man.cs.eventlite.controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
-
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,8 @@ import uk.ac.man.cs.eventlite.exceptions.EventNotFoundException;
 import uk.ac.man.cs.eventlite.exceptions.VenueNotFoundException;
 import uk.ac.man.cs.eventlite.entities.Event;
 import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -61,6 +64,17 @@ public class VenuesController {
 	public String getVenue(@PathVariable("id") long id, Model model) {
 		Venue venue = venueService.findById(id).orElseThrow(() -> new VenueNotFoundException(id));
 		model.addAttribute("venue", venue);
+		
+//		Sort events in order
+//		Iterable<Event> events = eventService.findAll();
+//		Set<Event> sortedEvents = new HashSet<>();
+//		for (Event event : events) {
+//			if (event.getVenue().equals(venue)){
+//				sortedEvents.add(event);
+//			}
+//		}
+		
+		model.addAttribute("event", venue.getEvents());
 		return "venues/show";
 	}
 
