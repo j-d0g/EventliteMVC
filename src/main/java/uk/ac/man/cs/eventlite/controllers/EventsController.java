@@ -120,18 +120,20 @@ public class EventsController {
 		return "redirect:/events";
 		}
 	
-	@PutMapping("/{id}")
-	public Event replaceEvent(@RequestBody Event newEvent, @PathVariable Long id) {
-		return eventService.findById(id)
-				.map(event -> {
-					event.setName(newEvent.getName());
-					return eventService.save(event);
-				})
-				.orElseGet(() -> {
-					newEvent.setId(id);
-					return eventService.save(newEvent);
-				});
-	}
+	@GetMapping("update/{id}")
+	 public String showUpdateEvent(@PathVariable("id") long id,Model model) {
+	  Event event = eventService.findById(id).orElseThrow(() -> new EventNotFoundException(id));
+	  model.addAttribute("event",event);
+	  model.addAttribute("venues",venueService.findAll());
+	  
+	  return "events/update";
+	 }
+	 
+	 @PostMapping(value="/updateEvent", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	 public String updateEvent(@RequestBody @Valid @ModelAttribute Event event) {
+	  eventService.save(event);
+	  return "redirect:/events";
+	 }
 	
 	
 	@DeleteMapping("/{id}")
