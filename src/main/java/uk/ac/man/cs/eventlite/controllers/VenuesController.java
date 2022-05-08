@@ -140,7 +140,8 @@ public class VenuesController {
 		Venue v = venueService.findById(id).orElseThrow(() -> new VenueNotFoundException(id));
 		if (v.getEvent().isEmpty())
 		{
-			venueService.deleteById(id); 
+			venueService.deleteById(id);
+			redirectAttrs.addFlashAttribute("ok_message", "Venue deleted.");
 			return "redirect:/venues";
 		}
 		else

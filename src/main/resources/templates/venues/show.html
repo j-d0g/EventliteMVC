@@ -12,57 +12,69 @@
   <table class="table table-striped table-hover">
     <thead>
     <tr>
-      <th><i class="fas fa-map-marker-alt"></i> Address</th>
+      <th><i class="fas fa-map-marker-alt"></i> Name</th>
       <th><i class="fas fa-calendar"></i> Capacity</th>
-      <th><i class="fas fa-sync"></i> Update</th>
+      <th><i class="fas fa-map-marker-alt"></i> Address</th>
     </tr>
     </thead>
     <tbody>
+    
       <td th:text="${venue.getName()}">Venue name</td>
       <td th:text="${{venue.getCapacity()}}">Venue capacity</td>
       <td th:text="${{venue.getAddress()}}">Venue address</td>
       <!-- ADD CODE FOR UPDATE BUTTON HERE -->
+    
     </tbody>
   </table>
-<<<<<<< HEAD
-  
+
+    
 	<table class="table table-striped table-hover">
 	  <thead>
 	    <tr>
 	      <th><i class="fas fa-bolt"></i> Event</th>
 	      <th><i class="fas fa-calendar"></i> Date</th>
 	      <th><i class="fas fa-clock"></i> Time</th>
+	      <th>Action</th>
 	    </tr>
 	  </thead>
+	  
 	  <tbody>
 	  
-	    <tr th:each="e : ${venue.events}">
+	    <tr th:each="e : ${venue.getEvent()}">
+	    
 	      <td > 
 	      <a th:href="@{/events/{num}(num=${e.id})}" th:text="${e.name}">My Event</a>
 	      </td>
+	      
 	      <td th:text="${{e.date}}">Event date</td>
 	      <td th:text="${{e.time}}">Event time</td>
+	      
 	      <td>
 	        <form th:action="${(#mvc.url('EC#deleteEvent').arg(0, e.id)).build()}" th:method="delete" sec:authorize="isAuthenticated()">
 	          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
 	        </form>
 	      </td>
 	      
+	      
 	    </tr>
+	   
 	  </tbody>
+	  
 	</table>
 
-  <form>
-=======
+   
+ 
   <div>
->>>>>>> refs/remotes/origin/delete_a_venue
     <a class="btn btn-primary" role="button" th:href="@{/venues}"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back</a>
 	<div style="float:left;padding-left:3px;">
+	
 		<form th:action="@{'/venues/' + ${venue.id}}" th:method="delete" >
 			<button type="submit" class="btn btn-danger"><i class ="fas fa-trash" aria-hidden="true"></i> Delete</button>
 		</form>
+		
 	</div>
   </div>
+
 </div>
 </body>
 </html>
