@@ -62,42 +62,76 @@
       
       <button type="submit" class="btn btn-danger" sec:authorize="isAuthenticated()"><i class="fas fa-trash" aria-hidden="true"></i> Delete All</button>
     </form>
+    
 	
 >>>>>>> refs/heads/issue_12(delete_event)
 =======
 
   <!-- mine -->
   <div id="map"
-       style="width:1100px;height:300px;border:1px solid gray;
-              position:absolute;left:100;bottom:0">
+       style="width:1100px;height:400px;border:1px solid gray;
+              position:relative;left:100;bottom:0">
   </div>
+  <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
+  
   <script>
       mapboxgl.accessToken =
       "pk.eyJ1IjoibWlhbzYyMCIsImEiOiJjbDJxYjY3bHEwNHppM2NzMHVpYWtzOTN0In0.U9krNPrlw9ltex1gjizNRw";
-      const map = new mapboxgl.Map({
-        container: "map", // container ID
-        style: "mapbox://styles/mapbox/streets-v11", // style URL
-        center: [-2.46778, 52.372], // starting position [lng, lat]
-        zoom: 9// starting zoom
-      });
+      
+      var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+    
+    var locations = ["M14 6XG"];
+    
+    /*<![CDATA[*/
+    /*[# th:each = " a : ${events}"]*/
+    locations.push(/*[# th:text="${a.venue.getName()}"]*/);  
+    /*[/]*/
+                             
+    var lnglat = Array()
+  
+    locations.forEach(myGeocoder);
+    
+    var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [-2.231480,53.464081],
+            zoom: 10
+        }); 
+   
+    function myGeocoder(item, index) {
+        
+        mapboxClient.geocoding
+        
+        .forwardGeocode({
+                query: item,
+                autocomplete: false,
+                limit: 1
+            })
 
-      for (const feature of geojson.features) {
+        .send()
 
-      const el = document.createElement('div');
-      el.className = 'marker';
+        .then(function (response) {
+            if (response &&
+                response.body &&
+                response.body.features &&
+                response.body.features.length
+                ) {
+          
+                var feature = response.body.features[0];
+                
+                console.log(locations[index]);
+                console.log(response.body.features[0].center);
+                
+                lnglat[index] = response.body.features[0].center
 
-      new mapboxgl.Marker(el)
-      .setLngLat(feature.geometry.coordinates)
-      .setPopup(
-      new mapboxgl.Popup({ offset: 25 }) // add popups
-      .setHTML(
-      `<h3>${feature.properties.title}</h3>
-      <p>${feature.properties.description}</p>`
-      )
-      )
-      .addTo(map);
-      }
-           
+                new mapboxgl.Marker().setLngLat(lnglat[index]).addTo(map);
+
+                }
+            });
+                
+    }
+
+      
     </script>
  
       
