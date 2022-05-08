@@ -121,7 +121,8 @@ public class Venue {
 		this.capacity = capacity;
 	}
 	
-	public Set<Event> getEvents(){
+	
+	public Set<Event> getEvent(){
 		return events;
 	}
 	

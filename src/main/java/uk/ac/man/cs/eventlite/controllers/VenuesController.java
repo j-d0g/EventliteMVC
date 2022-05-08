@@ -74,7 +74,7 @@ public class VenuesController {
 //			}
 //		}
 		
-		model.addAttribute("event", venue.getEvents());
+		model.addAttribute("event", venue.getEvent());
 		return "venues/show";
 	}
 
@@ -135,5 +135,18 @@ public class VenuesController {
 		return "redirect:/venues";
 	}
 	
+	@DeleteMapping("/{id}")
+	public String deleteVenue(@PathVariable("id") long id, RedirectAttributes redirectAttrs) {
+		Venue v = venueService.findById(id).orElseThrow(() -> new VenueNotFoundException(id));
+		if (v.getEvent().isEmpty())
+		{
+			venueService.deleteById(id); 
+			return "redirect:/venues";
+		}
+		else
+		{
+			return "redirect:/venues/{id}";
+		}	
+	}
 
 }
