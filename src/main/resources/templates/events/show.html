@@ -20,8 +20,9 @@
     </tr>
     </thead>
     <tbody>
-
-      <td th:text="${event.venue.name}">Event venue</td>
+      <td> 
+      <a th:href="@{/venues/{num}(num=${venue.id})}" th:text="${venue.name}">My Venue</a>
+      </td>
       <td th:text="${{event.date}}">Event date</td>
       <td th:text="${{event.time}}">Event time</td>
 
