@@ -1,10 +1,14 @@
 package uk.ac.man.cs.eventlite.dao;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import uk.ac.man.cs.eventlite.entities.Event;
 import uk.ac.man.cs.eventlite.entities.Venue;
 
 @Service
@@ -29,33 +34,11 @@ public class VenueServiceImpl implements VenueService {
 	
 	@Override
 	public long count() {
-		
-//		long count = 0;
-//		Iterator<Venue> i = findAll().iterator();
-//
-//		for (; i.hasNext(); count++) {
-//			i.next();
-//		}
-
 		return venueRepository.count();
 	}
 
 	@Override
 	public Iterable<Venue> findAll() {
-		
-//		Iterable<Venue> venues;
-//
-//		try {
-//			ObjectMapper mapper = new ObjectMapper();
-//			InputStream in = new ClassPathResource(DATA).getInputStream();
-//
-//			venues = mapper.readValue(in, mapper.getTypeFactory().constructCollectionType(List.class, Venue.class));
-//		} catch (Exception e) {
-//			// If we can't read the file, then the event list is empty...
-//			log.error("Exception while reading file '" + DATA + "': " + e);
-//			venues = Collections.emptyList();
-//		}
-
 		return venueRepository.findAll();
 	}
 	
@@ -78,5 +61,18 @@ public class VenueServiceImpl implements VenueService {
 	public void deleteById(long id) {
 		 venueRepository.deleteById(id);
 	 }
+	
+	@Override
+	public Iterable<Venue> findAllInAlphabeticalOrder() {
+		ArrayList<Venue> orderedVenues = (ArrayList<Venue>) StreamSupport
+				.stream(venueRepository.findAll().spliterator(), false)
+				.collect(Collectors.toList());
+		Collections.sort(orderedVenues, new Comparator<Venue>() {
+			  public int compare(Venue o1, Venue o2) {
+			      return o1.getName().compareToIgnoreCase(o2.getName());
+			  }
+			});
+		return orderedVenues;
+	}
 
 }

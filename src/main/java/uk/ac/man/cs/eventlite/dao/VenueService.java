@@ -18,4 +18,6 @@ public interface VenueService {
 	public Iterable<Venue> findall(String place);
 
 	public void deleteById(long id);
+	
+	public Iterable<Venue> findAllInAlphabeticalOrder();
 }
