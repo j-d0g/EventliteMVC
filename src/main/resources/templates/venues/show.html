@@ -40,7 +40,7 @@
 	  
 	  <tbody>
 	  
-	    <tr th:each="e : ${venue.getEvent()}">
+	    <tr th:each="e : ${event}">
 	    
 	      <td > 
 	      <a th:href="@{/events/{num}(num=${e.id})}" th:text="${e.name}">My Event</a>

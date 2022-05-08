@@ -4,6 +4,8 @@ package uk.ac.man.cs.eventlite.controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 //import java.util.Collection;
 //import java.util.HashSet;
 import java.util.List;
@@ -65,16 +67,14 @@ public class VenuesController {
 		Venue venue = venueService.findById(id).orElseThrow(() -> new VenueNotFoundException(id));
 		model.addAttribute("venue", venue);
 		
-//		Sort events in order
-//		Iterable<Event> events = eventService.findAll();
-//		Set<Event> sortedEvents = new HashSet<>();
-//		for (Event event : events) {
-//			if (event.getVenue().equals(venue)){
-//				sortedEvents.add(event);
-//			}
-//		}
+		List<Event> orderedEvents = new ArrayList<>(venue.getEvent());
+		Collections.sort(orderedEvents, new Comparator<Event>() {
+			  public int compare(Event o1, Event o2) {
+			      return o1.getDate().compareTo(o2.getDate());
+			  }
+			});
 		
-		model.addAttribute("event", venue.getEvent());
+		model.addAttribute("event", orderedEvents);
 		return "venues/show";
 	}
 
