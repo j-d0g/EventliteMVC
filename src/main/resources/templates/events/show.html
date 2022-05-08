@@ -1,8 +1,9 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/default}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/default}">
 <head>
   <title>Event</title>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 <body>
 <div layout:fragment="content">
@@ -27,18 +28,25 @@
     </tbody>
   </table>
 
-
-
   <blockquote>
     <p th:text="${event.description}">Event Describtion</p>
   </blockquote>
-
 
   <form>
     <a class="btn btn-primary" role="button" th:href="@{/events}"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back</a>
   	<button type="submit" class="btn btn-danger" sec:authorize="isAuthenticated()"><i class="fas fa-trash" aria-hidden="true"></i> Delete</button>
   </form>
 
+<div id="map" style='height: 450px;'>   </div>
+   <script th:inline="javascript">
+   mapboxgl.accessToken = 'pk.eyJ1IjoibWlhbzYyMCIsImEiOiJjbDJxYjY3bHEwNHppM2NzMHVpYWtzOTN0In0.U9krNPrlw9ltex1gjizNRw';
+   const map = new mapboxgl.Map({
+   container: 'map',
+   style: 'mapbox://styles/mapbox/streets-v11',
+   center: [12.550343, 55.665957],zoom: 9});
+   marker = new mapboxgl.Marker().setLngLat([12.554729, 55.70651]).addTo(map);
+  
+ </script>
 
 </div>
 </body>
