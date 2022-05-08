@@ -21,7 +21,7 @@
     </thead>
     <tbody>
 
-      <td th:text="${event.venue.getName()}">Event venue</td>
+      <td th:text="${event.venue.name}">Event venue</td>
       <td th:text="${{event.date}}">Event date</td>
       <td th:text="${{event.time}}">Event time</td>
 
@@ -31,6 +31,12 @@
   <blockquote>
     <p th:text="${event.description}">Event Describtion</p>
   </blockquote>
+  
+  <script>
+   var longitude = [[${event.venue.longitude}]];
+   var latitude = [[${event.venue.latitude}]];
+   </script>
+  
 
   <form>
     <a class="btn btn-primary" role="button" th:href="@{/events}"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back</a>
@@ -43,8 +49,9 @@
    const map = new mapboxgl.Map({
    container: 'map',
    style: 'mapbox://styles/mapbox/streets-v11',
-   center: [12.550343, 55.665957],zoom: 9});
-   marker = new mapboxgl.Marker().setLngLat([12.554729, 55.70651]).addTo(map);
+   center: [longitude, latitude],
+   zoom: 9});
+   marker = new mapboxgl.Marker().setLngLat([longitude,latitude]).addTo(map);
   
  </script>
 

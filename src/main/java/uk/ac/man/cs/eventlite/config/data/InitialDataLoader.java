@@ -42,16 +42,21 @@ public class InitialDataLoader {
 				v1.setId(1);
 				v1.setName("Kilburn G23");
 				v1.setCapacity(120);
-				v1.setAddress("20 Something Street, M14 6XG");
+				v1.setAddress("Oxford Road, M13 9PL");
+				v1.setLongitude(12.55);
+				v1.setLatitude(55.66);
 				venueService.save(v1);
 				
 				Venue v2 = new Venue();
 				v2.setId(2);
-				v2.setName("Online");
+				v2.setName("Engineering Building");
 				v2.setCapacity(10000);
-				v2.setAddress("20 Something Street, M14 6XG");
+				v2.setAddress("Booth Street E, M13 9RN");
+				v2.setLongitude(17.71);
+				v2.setLatitude(59.87);
 				venueService.save(v2);
 			}
+
 
 			if (eventService.count() > 0) {
 				log.info("Database already populated with events. Skipping event initialization.");
@@ -60,6 +65,17 @@ public class InitialDataLoader {
 				v1.setId(1);
 				v1.setName("Kilburn G23");
 				v1.setCapacity(120);
+				v1.setAddress("Oxford Road, M13 9PL");
+				v1.setLongitude(12.55);
+				v1.setLatitude(55.66);
+				
+				Venue v2 = new Venue();
+				v2.setId(2);
+				v2.setName("Engineering Building");
+				v2.setCapacity(10000);
+				v2.setAddress("Booth Street E, M13 9RN");
+				v2.setLongitude(17.71);
+				v2.setLatitude(59.87);
 				
 				Event e1 = new Event();
 				e1.setId(1);
@@ -74,7 +90,7 @@ public class InitialDataLoader {
 				e2.setName("COMP23412 Showcase, group G");
 				e2.setTime(LocalTime.of(16, 0));
 				e2.setDate(LocalDate.of(2022, 05, 19));
-				e2.setVenue(v1);
+				e2.setVenue(v2);
 				eventService.save(e2);
 				
 				Event e3 = new Event();

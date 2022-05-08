@@ -26,6 +26,9 @@ public class Venue {
 	@Size(max=255,message = "Venue name shouldn't be longer than 256 characters")
 
 	private String name;
+	
+	private double longitude;
+	private double latitude;
 
 	
 	//@NotBlank(message = "The road name can't be blank")
@@ -76,6 +79,23 @@ public class Venue {
 	//public String getPostcode() {
 	//	return postcode;
 	//}
+	
+	 public double getLongitude() {
+		  return longitude;
+	 }
+		 
+	public void setLongitude(double longitude) {
+		  this.longitude = longitude;
+	}
+		 
+	public double getLatitude() {
+		 return latitude;
+	}
+		 
+	public void setLatitude(double latitude) {
+		 this.latitude = latitude;
+	}
+
 
 	public long getId() {
 		return id;
