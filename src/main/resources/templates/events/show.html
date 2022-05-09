@@ -52,8 +52,8 @@
    style: 'mapbox://styles/mapbox/streets-v11',
    center: [longitude, latitude],
    zoom: 9});
-   marker = new mapboxgl.Marker().setLngLat([longitude,latitude]).addTo(map);
-  
+   marker = new mapboxgl.Marker().setLngLat([longitude,latitude]).setPopup(
+			new mapboxgl.Popup({ offset: 25 }).setHTML("<h3>" + [[${event.name}]] + "" + "</h3><p> Starts at:" + [[${event.time}]] + "" + "</p>")).addTo(map);
  </script>
 
 </div>
