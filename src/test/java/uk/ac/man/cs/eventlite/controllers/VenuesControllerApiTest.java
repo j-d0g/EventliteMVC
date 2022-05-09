@@ -59,5 +59,11 @@ public class VenuesControllerApiTest {
 		
 	
 	}
+	@Test
+	public void getVenueNotFound() throws Exception {
+		mvc.perform(get("/api/venues/99").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound())
+				.andExpect(jsonPath("$.error", containsString("venue 99"))).andExpect(jsonPath("$.id", equalTo(99)))
+				.andExpect(handler().methodName("getVenue"));
+	}
 	
 }

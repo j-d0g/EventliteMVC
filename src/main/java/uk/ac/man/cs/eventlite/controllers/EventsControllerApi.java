@@ -32,14 +32,13 @@ public class EventsControllerApi {
 	private static final String NOT_FOUND_MSG = "{ \"error\": \"%s\", \"id\": %d }";
 
 	private Venue venue;
+	
 	@Autowired
 	private EventService eventService;
 
 	@Autowired
 	private EventModelAssembler eventAssembler;
-	
-	@Autowired
-	private VenueModelAssembler venueAssembler;
+
 	
 	private VenueService venueService;
 
