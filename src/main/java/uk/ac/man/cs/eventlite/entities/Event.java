@@ -5,8 +5,10 @@ import java.time.LocalTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -27,6 +29,7 @@ public class Event {
 	private String name;
 
 	@ManyToOne
+	@JoinColumn(name="venue_id")
 	private Venue venue;
 	
 	private String description;
