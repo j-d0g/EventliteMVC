@@ -27,8 +27,17 @@
       <td th:text="${{event.time}}">Event time</td>
 
     </tbody>
-  </table>
-
+</table>
+	<form th:method="get" th:action="@{/events/postTweet}" th:object="${status}">
+	    <label for="tweet" >Share here:</label>
+	    <input class="form-control" type="text" name="tweet" id="tweet" placeholder="Say something:">
+	    <button class="btn btn-primary" type="submit" >Tweet</button>
+	    <div style="display:none">Your tweet was posted</div>
+	    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	    <script>
+	    $('button').click(function () {$('div').css('display', 'block');});
+	    </script> 
+  	</form>
   <blockquote>
     <p th:text="${event.description}">Event Description</p>
   </blockquote>

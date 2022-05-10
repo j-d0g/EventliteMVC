@@ -5,6 +5,7 @@
 <head>
   <title>All events</title>
 </head>
+
 <body>
   <div layout:fragment="content">
     <h1>All events</h1>
@@ -27,7 +28,7 @@
           <td th:text="${e.venue.getName()}">Event venue</td>
           <td th:text="${{e.date}}">Event date</td>
           <td th:text="${{e.time}}">Event time</td>
-          <td> <a calss="btn bt-primary" role="button" th:href="@{events/update/{id}(id=${e.id})}">Update</a></td>
+          <td> <a class="btn btn-primary" role="button" th:href="@{events/update/{id}(id=${e.id})}">Update</a></td>
           <td>
             <form th:action="${(#mvc.url('EC#deleteEvent').arg(0, e.id)).build()}" th:method="delete" sec:authorize="isAuthenticated()">
               <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -48,17 +49,14 @@
     </form>
 
 	<form th:action="${(#mvc.url('EC#deleteAllEvents')).build()}" th:method="delete">
-      
       <button type="submit" class="btn btn-danger" sec:authorize="isAuthenticated()"><i class="fas fa-trash" aria-hidden="true"></i> Delete All</button>
     </form>
-	
->>>>>>> refs/heads/issue_12(delete_event)
-=======
  
       
   </div>
   
 
 </body>
+
 </html>
 
