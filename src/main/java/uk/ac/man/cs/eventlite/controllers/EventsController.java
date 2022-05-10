@@ -161,11 +161,11 @@ public class EventsController {
 	}
 	
 	@GetMapping(value = "/postTweet")
-	  public String postTweet(@RequestHeader String r, @RequestParam(name="tweet") String tweetContent, Model model) throws TwitterException {
+	  public String postTweet(@RequestHeader String referer, @RequestParam(name="tweet") String tweetContent, Model model) throws TwitterException {
 
 	   TwitterService.createTweet(tweetContent);
 
-	   return "redirect:" + r;
+	   return "redirect:" + referer;
 	   
 	  }
 
