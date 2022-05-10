@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,8 +33,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo.None;
 
+import twitter4j.TwitterException;
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.VenueService;
+import uk.ac.man.cs.eventlite.dao.TwitterService;
 import uk.ac.man.cs.eventlite.exceptions.EventNotFoundException;
 import uk.ac.man.cs.eventlite.entities.Event;
 import uk.ac.man.cs.eventlite.entities.Venue;
@@ -47,6 +50,9 @@ public class EventsController {
 
 	@Autowired
 	private VenueService venueService;
+	
+	
+	private TwitterService twitterService;
 
 	@ExceptionHandler(EventNotFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
@@ -153,5 +159,14 @@ public class EventsController {
 
 		return "redirect:/events";
 	}
+	
+	@GetMapping(value = "/postTweet")
+	  public String postTweet(@RequestHeader String r, @RequestParam(name="tweet") String tweetContent, Model model) throws TwitterException {
+
+	   TwitterService.createTweet(tweetContent);
+
+	   return "redirect:" + r;
+	   
+	  }
 
 }
