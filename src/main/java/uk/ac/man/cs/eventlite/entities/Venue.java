@@ -45,6 +45,7 @@ public class Venue {
 
 	@OneToMany(targetEntity=Event.class,mappedBy="venue")
 	private Set<Event> events;
+	
 	private int capacity;
 	
 	private String address;
