@@ -123,7 +123,7 @@ public class Venue {
 	}
 	
 	
-	public Set<Event> getEvent(){
+	public Set<Event> getEvents(){
 		return events;
 	}
 	

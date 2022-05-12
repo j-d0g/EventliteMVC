@@ -67,7 +67,7 @@ public class VenuesController {
 		Venue venue = venueService.findById(id).orElseThrow(() -> new VenueNotFoundException(id));
 		model.addAttribute("venue", venue);
 		
-		List<Event> orderedEvents = new ArrayList<>(venue.getEvent());
+		List<Event> orderedEvents = new ArrayList<>(venue.getEvents());
 		Collections.sort(orderedEvents, new Comparator<Event>() {
 			  public int compare(Event o1, Event o2) {
 			      return o1.getDate().compareTo(o2.getDate());
@@ -138,7 +138,7 @@ public class VenuesController {
 	@DeleteMapping("/{id}")
 	public String deleteVenue(@PathVariable("id") long id, RedirectAttributes redirectAttrs) {
 		Venue v = venueService.findById(id).orElseThrow(() -> new VenueNotFoundException(id));
-		if (v.getEvent().isEmpty())
+		if (v.getEvents().isEmpty())
 		{
 			venueService.deleteById(id);
 			redirectAttrs.addFlashAttribute("ok_message", "Venue deleted.");
