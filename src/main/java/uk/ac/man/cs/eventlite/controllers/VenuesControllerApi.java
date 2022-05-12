@@ -71,7 +71,7 @@ public class VenuesControllerApi {
 		
 		Venue venue = venueService.findById(id).orElseThrow(() -> new EventNotFoundException(id));
 		
-		Set<Event> events = venue.getEvents();
+		Set<Event> events = venue.getEvent();
 		
 		List<Event> event = new ArrayList<>();
 		
