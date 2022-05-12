@@ -74,22 +74,16 @@
   </div>
   <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
   
-  <script>
+  <script th:inline="javascript">
       mapboxgl.accessToken =
       "pk.eyJ1IjoibWlhbzYyMCIsImEiOiJjbDJxYjY3bHEwNHppM2NzMHVpYWtzOTN0In0.U9krNPrlw9ltex1gjizNRw";
       
       var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
     
-    var locations = ["M14 6XG"];
     
-    /*<![CDATA[*/
-    /*[# th:each = " a : ${events}"]*/
-    locations.push(/*[# th:text="${a.venue.getName()}"]*/);  
-    /*[/]*/
+    locations = ["M14 6XG","M14 6XG","M14 6XG"];
                              
-    var lnglat = Array()
-  
-    locations.forEach(myGeocoder);
+    var lnglat = Array();
     
     var map = new mapboxgl.Map({
             container: 'map',
@@ -97,7 +91,9 @@
             center: [-2.231480,53.464081],
             zoom: 10
         }); 
-   
+        
+    locations.forEach(myGeocoder);
+    
     function myGeocoder(item, index) {
         
         mapboxClient.geocoding
