@@ -4,8 +4,18 @@
       layout:decorate="~{layouts/default}">
 <head>
   <title>All events</title>
+  
+  <!-- mine -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js"></script>
+  <style>
+     body { margin: 0; padding: 0; }
+     #map { position: absolute; bottom: 0; width: 100%; }
+  </style>
+  
 </head>
-
 <body>
   <div layout:fragment="content">
     <h1>All events</h1>
@@ -28,7 +38,7 @@
           <td th:text="${e.venue.getName()}">Event venue</td>
           <td th:text="${{e.date}}">Event date</td>
           <td th:text="${{e.time}}">Event time</td>
-          <td> <a class="btn btn-primary" role="button" th:href="@{events/update/{id}(id=${e.id})}">Update</a></td>
+          <td> <a calss="btn bt-primary" role="button" th:href="@{events/update/{id}(id=${e.id})}">Update</a></td>
           <td>
             <form th:action="${(#mvc.url('EC#deleteEvent').arg(0, e.id)).build()}" th:method="delete" sec:authorize="isAuthenticated()">
               <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -49,9 +59,72 @@
     </form>
 
 	<form th:action="${(#mvc.url('EC#deleteAllEvents')).build()}" th:method="delete">
+      
       <button type="submit" class="btn btn-danger" sec:authorize="isAuthenticated()"><i class="fas fa-trash" aria-hidden="true"></i> Delete All</button>
     </form>
- 
+
+  <!-- mine -->
+  <div id="map"
+       style="width:1100px;height:400px;border:1px solid gray;
+              position:relative;left:100;bottom:0">
+  </div>
+  <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
+  
+  <script th:inline="javascript">
+      mapboxgl.accessToken =
+      "pk.eyJ1IjoibWlhbzYyMCIsImEiOiJjbDJxYjY3bHEwNHppM2NzMHVpYWtzOTN0In0.U9krNPrlw9ltex1gjizNRw";
+      
+      var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+    
+    
+    locations = ["M14 6XG","M14 6XG","M14 6XG"];
+                             
+    var lnglat = Array();
+    
+    var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [-2.231480,53.464081],
+            zoom: 10
+        }); 
+        
+    locations.forEach(myGeocoder);
+    
+    function myGeocoder(item, index) {
+        
+        mapboxClient.geocoding
+        
+        .forwardGeocode({
+                query: item,
+                autocomplete: false,
+                limit: 1
+            })
+
+        .send()
+
+        .then(function (response) {
+            if (response &&
+                response.body &&
+                response.body.features &&
+                response.body.features.length
+                ) {
+          
+                var feature = response.body.features[0];
+                
+                console.log(locations[index]);
+                console.log(response.body.features[0].center);
+                
+                lnglat[index] = response.body.features[0].center
+
+                new mapboxgl.Marker().setLngLat(lnglat[index]).addTo(map);
+
+                }
+            });
+                
+    }
+
+      
+    </script>
       
   </div>
   
