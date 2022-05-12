@@ -103,17 +103,6 @@ public class VenuesControllerApi {
 			return eventAssembler.toCollectionModel(event2);
 		}
 		
-		
-
 		return eventAssembler.toCollectionModel(event2);
-		
-		
-		
-		
-		
-		
-		
 	}
-	
-
 }

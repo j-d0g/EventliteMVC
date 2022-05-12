@@ -2,6 +2,7 @@ package uk.ac.man.cs.eventlite.dao;
 
 
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -89,8 +90,10 @@ public class EventServiceImpl implements EventService {
 	public List<Event> getNextThree() {
 		List<Event> nextThreeEvents = new ArrayList<>();
 		for(Event e : findAll()) {
+			if (e.getDate().isBefore(LocalDate.now())) continue;
 			nextThreeEvents.add(e);
 			if (nextThreeEvents.size() == 3) break;
+			
 		}
 		return nextThreeEvents;
 	}
