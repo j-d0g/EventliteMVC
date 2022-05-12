@@ -1,6 +1,7 @@
 package uk.ac.man.cs.eventlite.dao;
 
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -87,10 +88,6 @@ public class VenueServiceImpl implements VenueService {
 				  return o2.getEvents().toArray().length - o1.getEvents().toArray().length;
 			  }
 			});
-		
-		return orderedVenues;
+		return orderedVenues.subList(0, 3);
 	}
-
-	
-
 }
