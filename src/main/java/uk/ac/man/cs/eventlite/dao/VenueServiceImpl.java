@@ -75,4 +75,22 @@ public class VenueServiceImpl implements VenueService {
 		return orderedVenues;
 	}
 
+	@Override
+	public List<Venue> findByMostEvents() {
+		Iterable<Venue> venues = venueRepository.findAll();
+		ArrayList<Venue> orderedVenues = (ArrayList<Venue>) StreamSupport
+				.stream(venues.spliterator(),  false)
+				.collect(Collectors.toList());
+				
+		Collections.sort(orderedVenues, new Comparator<Venue>() {
+			  public int compare(Venue o1, Venue o2) {
+				  return o2.getEvents().toArray().length - o1.getEvents().toArray().length;
+			  }
+			});
+		
+		return orderedVenues;
+	}
+
+	
+
 }
