@@ -1,6 +1,8 @@
 package uk.ac.man.cs.eventlite.dao;
 
 import uk.ac.man.cs.eventlite.entities.Event;
+
+import java.util.List;
 import java.util.Optional;
 
 
@@ -27,5 +29,7 @@ public interface EventService {
 	public void deleteAllById(Iterable<Long> ids);
 
 	public boolean existsById(long id);
+
+	public List<Event> getNextThree();
 
 }

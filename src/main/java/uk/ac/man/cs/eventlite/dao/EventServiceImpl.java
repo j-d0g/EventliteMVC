@@ -32,8 +32,6 @@ public class EventServiceImpl implements EventService {
 	public long count() {
 		return eventRepository.count();
 	}
-	
-		
 
 	@Override
 	public Iterable<Event> findAll() {
@@ -85,6 +83,16 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public boolean existsById(long id) {
 		return eventRepository.existsById(id);
+	}
+
+	@Override
+	public List<Event> getNextThree() {
+		List<Event> nextThreeEvents = new ArrayList<>();
+		for(Event e : findAll()) {
+			nextThreeEvents.add(e);
+			if (nextThreeEvents.size() == 3) break;
+		}
+		return nextThreeEvents;
 	}
 
 }
