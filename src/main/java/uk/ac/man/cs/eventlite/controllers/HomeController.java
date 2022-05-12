@@ -16,11 +16,12 @@ import uk.ac.man.cs.eventlite.entities.Event;
 import uk.ac.man.cs.eventlite.entities.Venue;
 
 @Controller
-@RequestMapping(value = "/", produces = { MediaType.TEXT_HTML_VALUE })
+@RequestMapping(value = "/home", produces = { MediaType.TEXT_HTML_VALUE })
 public class HomeController {
 	
 	@Autowired
 	private EventService eventService;
+	
 	@Autowired
 	private VenueService venueService;
 	
@@ -28,6 +29,6 @@ public class HomeController {
 	public String getHome(Model model) {
 		model.addAttribute("events", eventService.getNextThree());
 		model.addAttribute("venues", venueService.findByMostEvents());
-		return "/";
+		return "home/index";
 	}
 }
