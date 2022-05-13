@@ -97,5 +97,17 @@ public class EventServiceImpl implements EventService {
 		}
 		return nextThreeEvents;
 	}
+	
+	@Override
+	public List<Event> getRecentEvents(){
+		List<Event> recentEvents = new ArrayList<>();
+		for(Event e : findAll()) {
+			if (e.getDate().isBefore(LocalDate.now())) continue;
+			recentEvents.add(e);
+			if (recentEvents.size() == 5) break;
+			
+		}
+		return recentEvents;
+		}
+	}
 
-}
