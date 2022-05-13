@@ -32,8 +32,9 @@ public interface EventService {
 
 	public List<Event> getNextThree();
 
-	List<Event> findAllPrevious();
+	public List<Event> findAllPrevious();
 
 	public List<Event> findAllUpcoming();
+
 
 }

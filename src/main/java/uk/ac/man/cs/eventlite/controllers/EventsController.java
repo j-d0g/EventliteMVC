@@ -1,12 +1,11 @@
 package uk.ac.man.cs.eventlite.controllers;
 
 import java.util.List;
+import java.util.TreeMap;
 
 import javax.validation.Valid;
 
 import java.util.ArrayList;
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,11 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,8 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo.None;
-
+import twitter4j.Status;
+import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import uk.ac.man.cs.eventlite.dao.EventService;
 import uk.ac.man.cs.eventlite.dao.TwitterService;
@@ -51,8 +47,9 @@ public class EventsController {
 	@Autowired
 	private VenueService venueService;
 	
+	
 	private TwitterService twitterService;
-
+	
 	@ExceptionHandler(EventNotFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public String eventNotFoundHandler(EventNotFoundException ex, Model model) {
@@ -155,13 +152,46 @@ public class EventsController {
 
 		return "redirect:/events";
 	}
+	
 	@GetMapping(value = "/postTweet")
 	  public String postTweet(@RequestHeader String referer, @RequestParam(name="tweet") String tweetContent, Model model) throws TwitterException {
 
-	   twitterService.createTweet(tweetContent);
+	   TwitterService.createTweet(tweetContent);
 
 	   return "redirect:" + referer;
 	   
 	  }
+	
+	public String getEvents(Model model) {
+		model.addAttribute("recent_events",eventService.findAllUpcoming());
+		model.addAttribute("previous_events",eventService.findAllPrevious());
+		
+		try {
+			
+			Twitter twitter = TwitterService.getTwitterinstance();
+			List<Status> twitterFeedList = twitter.getUserTimeline();
+			TreeMap<String, List<String>> tweetsMap = new TreeMap<String, List<String>>();
+			
+			int i = 0;
+			for(Status t: twitterFeedList) {
+				if(i<5) {
+					List<String> contentList = new ArrayList<String>();
+					contentList.add("https://twitter.com/" + t.getUser().getScreenName()+"/status/"+t.getId());
+					contentList.add(t.getText());
+					tweetsMap.put(t.getCreatedAt().toString(), contentList);
+				}
+				else break;
+			}
+			i += 1;
+			model.addAttribute("tweets", tweetsMap);
+			
+		}catch (TwitterException e) {
+			e.printStackTrace();
+		}
+		
+		return "events/index";
+	}
+	
+	
 
 }

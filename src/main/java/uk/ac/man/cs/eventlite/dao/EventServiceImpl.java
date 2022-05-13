@@ -106,9 +106,10 @@ public class EventServiceImpl implements EventService {
 		while (!s.isEmpty()) upcomingEvents.add(s.pop());
 		return upcomingEvents;
 	}
-
+	
 	@Override
 	public List<Event> getNextThree() {
 		return findAllUpcoming().subList(0, 3);
 	}
 }
+

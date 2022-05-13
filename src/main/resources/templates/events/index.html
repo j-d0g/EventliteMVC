@@ -81,6 +81,22 @@
         </tr>
       </tbody>
     </table>
+    
+    <!-- mine -->
+    <font size ='6'><b>Twitter feed</b></font>
+    <table class ='table table-scriped table_hover'>  
+     <thead>
+         <th>Date</th>
+         <th>Tweet</th>
+     </thead>
+     <tbody>
+         <tr th:each ='tweet, stats:${tweets}'>
+          <td th:text='${{tweet.Key}}'>Date</td>
+          <td><a th:text='${{tweet.value[1]}}' th:href='${{tweet.value[0]}}'></a></td>
+         </tr>
+     </tbody>
+    </table>
+    
     <form action="#" th:action="@{/events/search}" th:object="${event}" th:method="GET">
         Search Events: <input type="text" th:value="${name}" name="name" id="name" value=""></input>
         <button type="submit">Search</button>
