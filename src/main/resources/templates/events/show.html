@@ -47,11 +47,9 @@
    var latitude = [[${event.venue.latitude}]];
    </script>
   
-
-  <form>
-    <a class="btn btn-primary" role="button" th:href="@{/events}"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back</a>
-  	<button type="submit" class="btn btn-danger" sec:authorize="isAuthenticated()"><i class="fas fa-trash" aria-hidden="true"></i> Delete</button>
-  </form>
+<form th:action="${(#mvc.url('EC#deleteEvent').arg(0, event.id)).build()}" th:method="delete" sec:authorize="isAuthenticated()">
+  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+</form>
 
 <div id="map" style='height: 450px;'>   </div>
    <script th:inline="javascript">
