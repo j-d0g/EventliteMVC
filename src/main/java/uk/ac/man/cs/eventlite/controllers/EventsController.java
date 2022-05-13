@@ -73,16 +73,11 @@ public class EventsController {
 	@GetMapping
 	public String getAllEvents(Model model) {
 
-		Iterable<Event> events = eventService.findAll();
-		List<Venue> venues = new ArrayList<Venue>();
-		events.forEach((element) -> {
-			if(!venues.contains(element.getVenue())) {
-				venues.add(element.getVenue());
-			}
-		});
-		model.addAttribute("events",events);
-		model.addAttribute("venues",venues);
-
+		List<Event> previousEvents = eventService.findAllPrevious();
+		List<Event> upcomingEvents = eventService.findAllUpcoming();	
+		
+		model.addAttribute("events",upcomingEvents);
+		model.addAttribute("previousEvents",previousEvents);
 
 		return "events/index";
 	}

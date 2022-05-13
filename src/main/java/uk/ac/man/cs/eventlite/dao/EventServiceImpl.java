@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Stack;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,15 +88,27 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public List<Event> getNextThree() {
-		List<Event> nextThreeEvents = new ArrayList<>();
-		for(Event e : findAll()) {
-			if (e.getDate().isBefore(LocalDate.now())) continue;
-			nextThreeEvents.add(e);
-			if (nextThreeEvents.size() == 3) break;
-			
+	public List<Event> findAllUpcoming(){
+		List<Event> upcomingEvents = new ArrayList<>();
+		for (Event e : findAll()) {
+			if (e.getDate().isAfter(LocalDate.now())) upcomingEvents.add(e);
 		}
-		return nextThreeEvents;
+		return upcomingEvents;
+	}
+	
+	@Override
+	public List<Event> findAllPrevious(){
+		Stack<Event> s = new Stack<>();
+		List<Event> upcomingEvents = new ArrayList<>();
+		for (Event e : findAll()) {
+			if (e.getDate().isBefore(LocalDate.now())) s.push(e);
+		}
+		while (!s.isEmpty()) upcomingEvents.add(s.pop());
+		return upcomingEvents;
 	}
 
+	@Override
+	public List<Event> getNextThree() {
+		return findAllUpcoming().subList(0, 3);
+	}
 }
