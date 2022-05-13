@@ -8,6 +8,11 @@
 </head>
 <body>
   <div layout:fragment="content">
+  	<div sec:authorize="isAuthenticated()">
+		<a class="btn btn-primary" role = "button" th:href="@{/venues/add-venue}">
+			<i class="fas fa-sign-in-alt" aria-hidden="true"></i> Add Venue
+		</a>
+	</div>
     <h1>All venues</h1>
 
     <table class="table table-striped table-hover">
@@ -30,11 +35,6 @@
           <td th:text="${{v.getCapacity()}}">Venue capacity</td>
           <td th:text="${{v.getAddress()}}">Venue address</td>
           <td> <a th:href="@{venues/updateVenue(id=${v.id})}">Update</a></td>
-          <td>
-            <form th:action="${(#mvc.url('VC#deleteVenue').arg(0, v.id)).build()}" th:method="delete" sec:authorize="isAuthenticated()">
-              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-            </form>
-          </td>
           
           
           
@@ -42,10 +42,6 @@
         </tr>
       </tbody>
     </table>
-    <form action="#" th:action="@{/events/search}" th:object="${event}" th:method="GET">
-        Search Events: <input type="text" th:value="${name}" name="name" id="name" value=""></input>
-        <button type="submit">Search</button>
-    </form>
     
     <p></p>
 
